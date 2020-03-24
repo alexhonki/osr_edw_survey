@@ -1,0 +1,90 @@
+_schema-version: '2.0'
+ID: OSR_EDW_SURVEY
+description: OSR_EDW_SURVEY
+version: 0.0.1
+
+modules:
+ - name:  OSR_EDW_SURVEY-DWF
+   type: dwf
+#   parameters:
+#      app-name: OSR_EDW_SURVEY-DWF
+   path: DWF
+   requires:
+#      - name: OSR_EDW_SURVEY-uaa
+      - name: OSR_EDW_SURVEY-dws
+   properties:
+     memory: 256M
+
+ - name: OSR_EDW_SURVEY-Backend
+   type: nodejs
+#   parameters:
+#      app-name: OSR_EDW_SURVEY-Backend
+   path: Backend
+   requires:
+#      - name: OSR_EDW_SURVEY-uaa
+      - name: OSR_EDW_SURVEY-container
+      - name: OSR_EDW_SURVEY-dws
+   properties:
+     memory: 512M
+     API_END_POINT: "${xs-api-url}"
+#     SAP_JWT_TRUST_ACL: "[{\"clientid\":\"*\",\"identityzone\":\"*\"}]"
+   provides:
+    - name:  OSR_EDW_SURVEY-Backend
+      properties:
+       service_url: ${default-url}
+
+ - name: OSR_EDW_SURVEY-Database
+   type: hdb
+#   parameters:
+#      app-name: OSR_EDW_SURVEY-Database
+   path: Database
+   requires:
+    - name: OSR_EDW_SURVEY-container
+      properties:
+        TARGET_CONTAINER: '~{hdi-container-name}'
+   properties:
+     memory: 256M
+     HDI_DEPLOY_OPTIONS: { "auto_undeploy": true }
+
+resources:
+# - name: OSR_EDW_SURVEY-uaa
+#   type: com.sap.xs.uaa
+#   parameters:
+#     service-name: OSR_EDW_SURVEY-uaa
+#     service-plan: space
+#     config:
+#         xsappname: OSR_EDW_SURVEY
+#         scopes:
+#          - name: $XSAPPNAME.TOE
+#            description: access for TOE
+#            grant-as-authority-to-apps:
+#             - dwf-toe
+#             - dwf-runtime
+#            granted-apps:
+#             - dwf-toe
+#             - dwf-runtime
+#         authorities:
+#          - $ACCEPT_GRANTED_AUTHORITIES
+#         role-templates:
+#           - name: User
+#             description: Access API
+#             scope-references:
+#              - $XSAPPNAME.TOE
+
+ - name: OSR_EDW_SURVEY-dws
+   properties:
+      dwf-edw-client-name: ${service-name}
+#      dwf-edw-client-name: OSR_EDW_SURVEY-dws
+#   parameters:
+#      service-name: OSR_EDW_SURVEY-dws
+   type: com.sap.xs.dwf-edw-client
+ - name: OSR_EDW_SURVEY-container
+   properties:
+      hdi-container-name: ${service-name}
+#      hdi-container-name: OSR_EDW_SURVEY-container
+#   parameters:
+#      service-name: OSR_EDW_SURVEY-container
+   type: com.sap.xs.hdi-container
+   parameters:
+     service-keys:
+     - name: dwf-monitor
