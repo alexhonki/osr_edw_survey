@@ -1,4 +1,4 @@
 {
-    "name":    "DataWareHouse.Database",
+    "name":    "osr.edw.survey",
     "subfolder": "append"
 }

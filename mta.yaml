@@ -42,6 +42,11 @@ modules:
     - name: OSR_EDW_SURVEY-container
       properties:
         TARGET_CONTAINER: '~{hdi-container-name}'
+    - name: OSR-EDW-PLATFORM-grantor
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: logical-OSR-EDW-PLATFORM-grantor
+        service: '~{OSR-EDW-PLATFORM-grantor-service}'        
    properties:
      memory: 256M
      HDI_DEPLOY_OPTIONS: { "auto_undeploy": true }
@@ -78,6 +83,12 @@ resources:
 #   parameters:
 #      service-name: OSR_EDW_SURVEY-dws
    type: com.sap.xs.dwf-edw-client
+ - name: OSR-EDW-PLATFORM-grantor
+   properties:
+     OSR-EDW-PLATFORM-grantor-service: '${service-name}'
+   parameters:
+     service-name: OSR_EDW_PLATFORM-deploy
+   type: org.cloudfoundry.existing-service   
  - name: OSR_EDW_SURVEY-container
    properties:
       hdi-container-name: ${service-name}

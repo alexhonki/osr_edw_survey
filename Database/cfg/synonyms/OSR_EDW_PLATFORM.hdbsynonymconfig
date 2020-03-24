@@ -1,0 +1,56 @@
+{
+  "osr.edw.survey.propagation.synonyms::RMS_BUT000_ORG": {
+    "target": {
+      "object": "osr.edw.propagation.rms.proxy::CV_BUT000_ORG",
+      "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+  "osr.dm.db.propagation.synonyms::RMS_BUT000": {
+    "target": {
+      "object": "osr.edw.propagation.rms.proxy::CV_BUT000",
+      "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },  
+  "osr.edw.survey.propagation.synonyms::RMS_BUT021_FS": {
+    "target": {
+      "object": "osr.edw.staging.md.rms.proxy::CV_BUT021FS",
+       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+  "osr.edw.survey.propagation.synonyms::RMS_BUT0ID": {
+    "target": {
+      "object": "osr.edw.staging.md.rms.proxy::CV_BUT0ID",
+      "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+    "osr.edw.survey.propagation.synonyms::RMS_BUT100": {
+    "target": {
+      "object": "osr.edw.staging.md.rms.proxy::CV_BUT100",
+      "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+  "osr.edw.survey.propagation.synonyms::RMS_ADRC": {
+    "target": {
+      "object": "osr.edw.propagation.rms.proxy::CV_ADRC",
+       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+  "osr.edw.survey.propagation.synonyms::RMS_ADR2": {
+    "target": {
+      "object": "osr.edw.staging.md.rms.proxy::CV_ADR2",
+       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+  "osr.edw.survey.propagation.synonyms::RMS_ADR6": {
+    "target": {
+      "object": "osr.edw.propagation.rms.proxy::CV_ADR6",
+       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  },
+  "osr.edw.survey.staging.synonyms::TF_DFACTS_SGL_VAL": {
+    "target": {
+      "object": "osr.edw.staging.td.rms.pscd.proxy::TF_DFACTS_SGL_VAL",
+       "schema.configure": "logical-OSR-EDW-PLATFORM-grantor/schema"
+    }
+  }
+}

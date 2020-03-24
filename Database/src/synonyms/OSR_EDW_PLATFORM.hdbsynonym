@@ -1,0 +1,10 @@
+{
+  "osr.edw.survey.propagation.synonyms::RMS_BUT000_ORG": {},
+  "osr.edw.survey.propagation.synonyms::RMS_BUT021_FS":{},
+  "osr.edw.survey.propagation.synonyms::RMS_BUT0ID":{},
+  "osr.edw.survey.propagation.synonyms::RMS_BUT100":{},
+  "osr.edw.survey.propagation.synonyms::RMS_ADRC":{},
+  "osr.edw.survey.propagation.synonyms::RMS_ADR2":{},
+  "osr.edw.survey.propagation.synonyms::RMS_ADR6":{},
+  "osr.edw.survey.staging.synonyms::TF_DFACTS_SGL_VAL":{}
+}
