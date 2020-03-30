@@ -1,0 +1,93 @@
+FUNCTION "osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS"( IN IV_TODATE NVARCHAR(10) )
+       RETURNS TABLE (
+    	RESPONSEID      		NVARCHAR(100),
+    	QUAL_ABN    			NVARCHAR(1024),
+    	QUAL_BPARTNER   		NVARCHAR(1024),
+    	QUAL_PTAX_THRESHOLD		NVARCHAR(1024),
+    	BP_PARTNER      		NVARCHAR(10),
+    	BP_ABN      			NVARCHAR(60),
+    	BP_ABN_CHECK    		NVARCHAR(1),
+    	BP_BP_CHECK     		NVARCHAR(1),
+    	ABN_ABN         		NVARCHAR(60),
+    	ABN_PARTNER				NVARCHAR(10),
+    	ABN_ABN_CHECK   		NVARCHAR(1),
+    	ABN_BP_CHECK    		NVARCHAR(1),
+    	RMS_PTAX_THRESHOLD		NVARCHAR(1),
+    	PTAX_THRESHOLD_CHECK	NVARCHAR(1),
+    	MATCH_STATUS			NVARCHAR(1)
+    	
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+   
+-- Find all the groups with PTax over $6.5 Million   
+RMS_PTAX_THRESHOLD =    
+    select 
+    	distinct PARTNER1,
+		'X' as RMS_PTAX_THRESHOLD
+		FROM "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+		where "CC_EST_TAX_BRACKET_JOINED" = 'Over $6.5 Million' 
+		;
+    
+MATCH_CHECK =
+	Select	
+	"RESPONSEID",
+	"Q4_ABN" as QUAL_ABN,
+	RIGHT('000'||"Q6_BPARTNER",10) as QUAL_BPARTNER,
+	"Q2_PTAX_THRESHOLD" as QUAL_PTAX_THRESHOLD,
+	Ptax_BP.PARTNER as BP_PARTNER,
+	Ptax_BP.CC_ABN as BP_ABN,
+	CASE WHEN Q4_ABN = Ptax_BP.CC_ABN THEN 'X' ELSE NULL END as BP_ABN_CHECK,
+	CASE WHEN RIGHT('000'||"Q6_BPARTNER",10) = 	Ptax_BP.PARTNER THEN 'X' ELSE NULL END as BP_BP_CHECK,
+	Ptax_ABN.CC_ABN as ABN_ABN,
+	Ptax_ABN.PARTNER as ABN_PARTNER,
+	CASE WHEN Q4_ABN = Ptax_ABN.CC_ABN THEN 'X' ELSE NULL END as ABN_ABN_CHECK,
+	CASE WHEN RIGHT('000'||"Q6_BPARTNER",10) = 	Ptax_ABN.PARTNER THEN 'X' ELSE NULL END as ABN_BP_CHECK,
+	Rms_Threshold.RMS_PTAX_THRESHOLD as RMS_PTAX_THRESHOLD,
+	CASE WHEN ("Q2_PTAX_THRESHOLD" = '1' or Rms_Threshold.RMS_PTAX_THRESHOLD = 'X') THEN 'X' ELSE NULL END as PTAX_THRESHOLD_CHECK
+	FROM "osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS" as Qual
+		LEFT OUTER JOIN (
+						select CC_ABN, PARTNER, PARTNER1
+						from "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+						where "ZPRE_VALID_TO" > cast(:IV_TODATE as date)
+						) as Ptax_BP
+		ON 	RIGHT('000'||Qual."Q6_BPARTNER",10)	= Ptax_BP.PARTNER	
+			LEFT OUTER JOIN (
+						select CC_ABN, PARTNER
+						from "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+						where "ZPRE_VALID_TO" > cast(:IV_TODATE as date)
+						) as Ptax_ABN
+			ON 	Qual."Q4_ABN" = Ptax_ABN.CC_ABN
+				LEFT OUTER JOIN :RMS_PTAX_THRESHOLD as Rms_Threshold
+				ON Ptax_BP.PARTNER1 = Rms_Threshold.PARTNER1
+			;
+    
+RETURN    
+    Select	
+		RESPONSEID      		,
+    	QUAL_ABN    			,
+    	QUAL_BPARTNER   		,
+    	QUAL_PTAX_THRESHOLD		,
+    	BP_PARTNER      		,
+    	BP_ABN      			,
+    	BP_ABN_CHECK    		,
+    	BP_BP_CHECK     		,
+    	ABN_ABN         		,
+    	ABN_PARTNER				,
+    	ABN_ABN_CHECK   		,
+    	ABN_BP_CHECK    		,
+    	RMS_PTAX_THRESHOLD		,
+    	PTAX_THRESHOLD_CHECK	,
+    	CASE WHEN (BP_ABN_CHECK = 'X' and BP_BP_CHECK = 'X' and ABN_ABN_CHECK = 'X' and ABN_BP_CHECK = 'X') 
+		 THEN 'C' ELSE (CASE WHEN (BP_ABN_CHECK IS NULL and BP_BP_CHECK IS NULL and ABN_ABN_CHECK IS NULL and ABN_BP_CHECK IS NULL) 
+		 THEN 'N' ELSE 'P' END)END 
+		 as MATCH_STATUS
+	FROM :MATCH_CHECK	 
+		;
+		
+		
+END;

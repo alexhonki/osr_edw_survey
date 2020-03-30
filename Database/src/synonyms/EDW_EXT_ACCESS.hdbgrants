@@ -1,0 +1,14 @@
+{
+	"edw-ext-access-grantor": {
+		"object_owner": { 
+			"roles": [
+				"osr.edw.datahub.db.roles::XSC_EXTERNAL_ACCESS_G"
+			]
+		},
+		"application_user": {
+			"roles": [
+				"osr.edw.datahub.db.roles::XSC_EXTERNAL_ACCESS"
+			]
+		}
+	}
+}

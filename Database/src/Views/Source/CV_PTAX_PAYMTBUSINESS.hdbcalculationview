@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_PTAXPAYMTBUSINESS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="osr.hana.platform.synonym::EDW_DH_STAGE.QResp_PTaxPaymtBusiness">
+    <resourceUri>osr.hana.platform.synonym::EDW_DH_STAGE.QResp_PTaxPaymtBusiness</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="osr.hana.platform.synonym::EDW_DH_STAGE.QResp_PTaxPaymtBusiness">
+  <attributes>
+    <attribute id="SURVEYID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SURVEYID"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="SURVEYID"/>
+    </attribute>
+    <attribute id="RESPONSEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RESPONSEID"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="RESPONSEID"/>
+    </attribute>
+    <attribute id="STARTDATE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STARTDATE"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="STARTDATE"/>
+    </attribute>
+    <attribute id="ENDDATE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ENDDATE"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="ENDDATE"/>
+    </attribute>
+    <attribute id="RECIPIENTLASTNAME" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECIPIENTLASTNAME"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="RECIPIENTLASTNAME"/>
+    </attribute>
+    <attribute id="RECIPIENTFIRSTNAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECIPIENTFIRSTNAME"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="RECIPIENTFIRSTNAME"/>
+    </attribute>
+    <attribute id="RECIPIENTEMAIL" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RECIPIENTEMAIL"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="RECIPIENTEMAIL"/>
+    </attribute>
+    <attribute id="FINISHED" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FINISHED"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="FINISHED"/>
+    </attribute>
+    <attribute id="STATUS" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="STATUS"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="STATUS"/>
+    </attribute>
+    <attribute id="Q1" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q1"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q1"/>
+    </attribute>
+    <attribute id="Q2_PTAX_THRESHOLD" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q2_PTAX_THRESHOLD"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q2"/>
+    </attribute>
+    <attribute id="Q14" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q14"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q14"/>
+    </attribute>
+    <attribute id="Q16" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q16"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q16"/>
+    </attribute>
+    <attribute id="Q13" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q13"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q13"/>
+    </attribute>
+    <attribute id="Q5" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q5"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q5"/>
+    </attribute>
+    <attribute id="Q3_BUSINESS_NAME" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q3_BUSINESS_NAME"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q3"/>
+    </attribute>
+    <attribute id="Q4_ABN" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q4_ABN"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q4"/>
+    </attribute>
+    <attribute id="Q6_BPARTNER" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q6_BPARTNER"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q6"/>
+    </attribute>
+    <attribute id="Q7_EMAIL" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q7_EMAIL"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q7"/>
+    </attribute>
+    <attribute id="Q9_PHONE_NUM" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q9_PHONE_NUM"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q9"/>
+    </attribute>
+    <attribute id="Q10_CONTACT_NAME" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q10_CONTACT_NAME"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q10"/>
+    </attribute>
+    <attribute id="Q12_CONVID_IMPACT" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Q12_CONVID_IMPACT"/>
+      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxPaymtBusiness" columnName="Q12"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

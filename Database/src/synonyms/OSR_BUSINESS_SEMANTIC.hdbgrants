@@ -1,0 +1,14 @@
+{
+	"logical-OSR-BUSINESS-SEMANTIC-grantor": {
+		"object_owner": { 
+			"container_roles": [
+				"OSR_BUSINESS_SEMANTIC.db.defaults::admin"
+			]
+		},
+		"application_user": {
+			"container_roles": [
+				"OSR_BUSINESS_SEMANTIC.db.defaults::admin"
+			]
+		}
+	}
+}

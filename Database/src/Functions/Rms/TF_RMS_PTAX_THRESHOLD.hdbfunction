@@ -1,0 +1,18 @@
+FUNCTION "osr.edw.survey.Functions.Rms::TF_RMS_PTAX_THRESHOLD"( )
+       RETURNS TABLE (
+    	PARTNER1      NVARCHAR(10)
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+RETURN    
+    select 
+    	distinct PARTNER1
+		FROM "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+		where "CC_EST_TAX_BRACKET_JOINED" = 'Over $6.5 Million' 
+;
+		
+END;

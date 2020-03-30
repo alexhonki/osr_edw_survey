@@ -46,7 +46,18 @@ modules:
       group: SERVICE_REPLACEMENTS
       properties:
         key: logical-OSR-EDW-PLATFORM-grantor
-        service: '~{OSR-EDW-PLATFORM-grantor-service}'        
+        service: '~{OSR-EDW-PLATFORM-grantor-service}'   
+    - name: OSR-EDW-SOURCE-RMS-grantor
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: logical-OSR-EDW-SOURCE-RMS-grantor
+        service: '~{OSR-EDW-SOURCE-RMS-grantor-service}'    
+    - name: OSR-BUSINESS-SEMANTIC-grantor
+      group: SERVICE_REPLACEMENTS
+      properties:
+        key: logical-OSR-BUSINESS-SEMANTIC-grantor
+        service: '~{OSR-BUSINESS-SEMANTIC-grantor-service}'   
+    - name: edw-ext-access-grantor        
    properties:
      memory: 256M
      HDI_DEPLOY_OPTIONS: { "auto_undeploy": true }
@@ -88,7 +99,22 @@ resources:
      OSR-EDW-PLATFORM-grantor-service: '${service-name}'
    parameters:
      service-name: OSR_EDW_PLATFORM-deploy
-   type: org.cloudfoundry.existing-service   
+   type: org.cloudfoundry.existing-service  
+ - name: OSR-EDW-SOURCE-RMS-grantor
+   properties:
+     OSR-EDW-SOURCE-RMS-grantor-service: '${service-name}'
+   parameters:
+     service-name: OSR_EDW_SOURCE_RMS-deploy
+   type: org.cloudfoundry.existing-service  
+ - name: OSR-BUSINESS-SEMANTIC-grantor
+   properties:
+     OSR-BUSINESS-SEMANTIC-grantor-service: '${service-name}'
+   parameters:
+     service-name: OSR_BUSINESS_SEMANTIC-deploy
+   type: org.cloudfoundry.existing-service
+ - name: edw-ext-access-grantor
+   type: org.cloudfoundry.existing-service
+   description: edw-ext-access-grantor   
  - name: OSR_EDW_SURVEY-container
    properties:
       hdi-container-name: ${service-name}

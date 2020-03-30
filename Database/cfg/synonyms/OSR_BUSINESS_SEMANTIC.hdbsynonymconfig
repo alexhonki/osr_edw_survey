@@ -1,0 +1,8 @@
+{
+  "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview": {
+    "target": {
+      "object": "osr.business.semantic.db.Tables::T_PrtClientOverview",
+      "schema.configure": "logical-OSR-BUSINESS-SEMANTIC-grantor/schema"
+    }
+  }
+}
