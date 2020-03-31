@@ -6,19 +6,12 @@
     <descriptions defaultDescription=" "/>
     <variableProperties datatype="NVARCHAR" length="10">
       <valueDomain type="empty"/>
-      <selection/>
+      <selection multiLine="false" type="SingleValue"/>
     </variableProperties>
   </variable>
 </localVariables>
-<variableMappings>
-  <mapping xsi:type="Variable:ConstantVariableMapping" dataSource="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS" value="2019-07-01">
-    <targetVariable name="IV_TODATE" resourceUri="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS"/>
-  </mapping>
-</variableMappings>
+<variableMappings/>
 <dataSources>
-  <DataSource id="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS" type="TABLE_FUNCTION">
-    <resourceUri>osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS</resourceUri>
-  </DataSource>
   <DataSource id="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
     <resourceUri>osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS</resourceUri>
   </DataSource>
@@ -32,21 +25,27 @@
       <viewAttribute id="QUAL_EMAIL"/>
       <viewAttribute id="MATCH_STATUS"/>
       <viewAttribute id="PTAX_THRESHOLD_CHECK"/>
+      <viewAttribute hidden="true" id="JOIN$RESPONSEID$RESPONSEID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
-    <input node="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS">
+    <input node="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_EMAIL" source="Q7_EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
+    </input>
+    <input node="TableFunction_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="RESPONSEID" source="RESPONSEID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_BPARTNER" source="QUAL_BPARTNER"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_ABN" source="QUAL_ABN"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="MATCH_STATUS" source="MATCH_STATUS"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
-    </input>
-    <input node="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
-      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_EMAIL" source="Q7_EMAIL"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="RESPONSEID" source="RESPONSEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
     </input>
     <filter>&quot;MATCH_STATUS&quot; = 'C'</filter>
-    <joinAttribute name="RESPONSEID"/>
+    <joinAttribute name="JOIN$RESPONSEID$RESPONSEID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:TableFunctionView" id="TableFunction_1" tableFunctionName="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS">
+    <viewAttributes/>
+    <calculatedViewAttributes/>
   </calculationView>
 </calculationViews>
 <logicalModel id="Join_1">
@@ -87,14 +86,19 @@
       <upperLeftCorner x="95" y="222"/>
       <rectangleSize height="30" width="160"/>
     </shape>
-    <shape modelObjectName="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
-      <upperLeftCorner x="44" y="43"/>
-      <rectangleSize width="416.51171875"/>
-    </shape>
     <shape modelObjectName="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
-      <upperLeftCorner x="320" y="30"/>
+      <upperLeftCorner x="392" y="39"/>
       <rectangleSize width="401.0078125"/>
+    </shape>
+  
+    <shape modelObjectName="TableFunction_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="46.0078125" y="39"/>
+      <rectangleSize width="232.49658203125"/>
+    </shape>
+    <shape expanded="true" modelObjectName="TableFunction_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="9" y="344"/>
+      <rectangleSize height="30" width="160"/>
     </shape>
   </shapes>
 </layout>
-</Calculation:scenario> 
+</Calculation:scenario>
