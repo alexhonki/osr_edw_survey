@@ -1,0 +1,13 @@
+{
+	"role":{
+		"name": "osr.edw.survey.dac::read",
+		"schema_privileges": [{
+		   "privileges": ["SELECT METADATA",
+		    			  "SELECT CDS METADATA",
+		    			  "SELECT",
+		    			  "EXECUTE",
+		    			  "DEBUG"
+		  ]
+		}]
+     }
+}

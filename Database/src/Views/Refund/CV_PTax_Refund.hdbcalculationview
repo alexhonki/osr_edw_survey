@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Variable="http://www.sap.com/ndb/BiModelVariable.ecore" id="osr.edw.survey.Views.Refund::CV_PTax_Refund" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_PTax_Refund"/>
+<localVariables>
+  <variable id="IV_TODATE" parameter="true">
+    <descriptions defaultDescription=" "/>
+    <variableProperties datatype="NVARCHAR" length="10">
+      <valueDomain type="empty"/>
+      <selection/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings>
+  <mapping xsi:type="Variable:ConstantVariableMapping" dataSource="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS" value="2019-07-01">
+    <targetVariable name="IV_TODATE" resourceUri="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS"/>
+  </mapping>
+</variableMappings>
+<dataSources>
+  <DataSource id="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS" type="TABLE_FUNCTION">
+    <resourceUri>osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS</resourceUri>
+  </DataSource>
+  <DataSource id="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
+    <resourceUri>osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_1" joinType="inner" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="RESPONSEID"/>
+      <viewAttribute id="QUAL_BPARTNER"/>
+      <viewAttribute id="QUAL_ABN"/>
+      <viewAttribute id="QUAL_EMAIL"/>
+      <viewAttribute id="MATCH_STATUS"/>
+      <viewAttribute id="PTAX_THRESHOLD_CHECK"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESPONSEID" source="RESPONSEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_BPARTNER" source="QUAL_BPARTNER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_ABN" source="QUAL_ABN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATCH_STATUS" source="MATCH_STATUS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
+    </input>
+    <input node="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_EMAIL" source="Q7_EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESPONSEID" source="RESPONSEID"/>
+    </input>
+    <filter>&quot;MATCH_STATUS&quot; = 'C'</filter>
+    <joinAttribute name="RESPONSEID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="RESPONSEID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RESPONSEID"/>
+      <keyMapping columnObjectName="Join_1" columnName="RESPONSEID"/>
+    </attribute>
+    <attribute id="QUAL_BPARTNER" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_BPARTNER"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUAL_BPARTNER"/>
+    </attribute>
+    <attribute id="QUAL_ABN" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_ABN"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUAL_ABN"/>
+    </attribute>
+    <attribute id="QUAL_EMAIL" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_EMAIL"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUAL_EMAIL"/>
+    </attribute>
+    <attribute id="PTAX_THRESHOLD_CHECK" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PTAX_THRESHOLD_CHECK"/>
+      <keyMapping columnObjectName="Join_1" columnName="PTAX_THRESHOLD_CHECK"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="95" y="222"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="44" y="43"/>
+      <rectangleSize width="416.51171875"/>
+    </shape>
+    <shape modelObjectName="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="401.0078125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario> 
