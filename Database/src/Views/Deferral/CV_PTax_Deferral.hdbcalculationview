@@ -40,7 +40,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
     </input>
-    <filter>&quot;MATCH_STATUS&quot; = 'C'</filter>
+    <filter>&quot;MATCH_STATUS&quot; IN ('C', 'A')</filter>
     <joinAttribute name="JOIN$RESPONSEID$RESPONSEID"/>
   </calculationView>
   <calculationView xsi:type="Calculation:TableFunctionView" id="TableFunction_1" tableFunctionName="osr.edw.survey.Functions.Match::TF_PTAX_DEFERRAL">

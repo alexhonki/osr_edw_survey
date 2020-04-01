@@ -40,7 +40,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
     </input>
-    <filter>&quot;MATCH_STATUS&quot; = 'C'</filter>
+    <filter>&quot;MATCH_STATUS&quot; IN ('C', 'A')</filter>
     <joinAttribute name="JOIN$RESPONSEID$RESPONSEID"/>
   </calculationView>
   <calculationView xsi:type="Calculation:TableFunctionView" id="TableFunction_1" tableFunctionName="osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS">
@@ -88,12 +88,12 @@
     </shape>
     <shape modelObjectName="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="392" y="39"/>
-      <rectangleSize width="401.0078125"/>
+      <rectangleSize width="401"/>
     </shape>
   
     <shape modelObjectName="TableFunction_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
-      <upperLeftCorner x="46.0078125" y="39"/>
-      <rectangleSize width="232.49658203125"/>
+      <upperLeftCorner x="46" y="39"/>
+      <rectangleSize width="232"/>
     </shape>
     <shape expanded="true" modelObjectName="TableFunction_1" modelObjectNameSpace="CalculationView">
       <upperLeftCorner x="9" y="344"/>
