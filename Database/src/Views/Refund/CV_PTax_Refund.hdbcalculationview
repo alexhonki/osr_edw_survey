@@ -25,11 +25,13 @@
       <viewAttribute id="QUAL_EMAIL"/>
       <viewAttribute id="MATCH_STATUS"/>
       <viewAttribute id="PTAX_THRESHOLD_CHECK"/>
+      <viewAttribute id="SURVEYID"/>
       <viewAttribute hidden="true" id="JOIN$RESPONSEID$RESPONSEID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
       <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_EMAIL" source="Q7_EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SURVEYID" source="SURVEYID"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
     </input>
     <input node="TableFunction_1">
@@ -50,23 +52,27 @@
 </calculationViews>
 <logicalModel id="Join_1">
   <attributes>
-    <attribute id="RESPONSEID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="SURVEYID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SURVEYID"/>
+      <keyMapping columnObjectName="Join_1" columnName="SURVEYID"/>
+    </attribute>
+    <attribute id="RESPONSEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RESPONSEID"/>
       <keyMapping columnObjectName="Join_1" columnName="RESPONSEID"/>
     </attribute>
-    <attribute id="QUAL_BPARTNER" order="2" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="QUAL_BPARTNER" order="3" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="QUAL_BPARTNER"/>
       <keyMapping columnObjectName="Join_1" columnName="QUAL_BPARTNER"/>
     </attribute>
-    <attribute id="QUAL_ABN" order="3" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="QUAL_ABN" order="4" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="QUAL_ABN"/>
       <keyMapping columnObjectName="Join_1" columnName="QUAL_ABN"/>
     </attribute>
-    <attribute id="QUAL_EMAIL" order="4" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="QUAL_EMAIL" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="QUAL_EMAIL"/>
       <keyMapping columnObjectName="Join_1" columnName="QUAL_EMAIL"/>
     </attribute>
-    <attribute id="PTAX_THRESHOLD_CHECK" order="5" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="PTAX_THRESHOLD_CHECK" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PTAX_THRESHOLD_CHECK"/>
       <keyMapping columnObjectName="Join_1" columnName="PTAX_THRESHOLD_CHECK"/>
     </attribute>
@@ -83,7 +89,7 @@
     </shape>
   
     <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="95" y="222"/>
+      <upperLeftCorner x="95" y="218"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
