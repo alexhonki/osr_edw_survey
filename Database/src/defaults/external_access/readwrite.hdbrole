@@ -1,0 +1,6 @@
+{
+	"role":{
+		"name": "osr.edw.survey.dac::readwrite",
+		"schema_privileges":[ { "privileges":[ "CREATE ANY" , "INSERT" , "SELECT" , "DEBUG" , "ALTER" , "DELETE" , "EXECUTE" , "UPDATE"  ] } ]
+     }
+}
