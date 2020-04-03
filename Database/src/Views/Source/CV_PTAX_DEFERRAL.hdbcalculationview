@@ -4,108 +4,108 @@
 <localVariables/>
 <variableMappings/>
 <dataSources>
-  <DataSource id="osr.hana.platform.synonym::EDW_DH_STAGE.QResp_PTaxDeferral">
-    <resourceUri>osr.hana.platform.synonym::EDW_DH_STAGE.QResp_PTaxDeferral</resourceUri>
+  <DataSource id="osr.edw.survey.Data::Survey.PTAX_DEFERRAL">
+    <resourceUri>osr.edw.survey.Data::Survey.PTAX_DEFERRAL</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews/>
-<logicalModel id="osr.hana.platform.synonym::EDW_DH_STAGE.QResp_PTaxDeferral">
+<logicalModel id="osr.edw.survey.Data::Survey.PTAX_DEFERRAL">
   <attributes>
     <attribute id="SURVEYID" order="1" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="SURVEYID"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="SURVEYID"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="SURVEYID"/>
     </attribute>
     <attribute id="RESPONSEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RESPONSEID"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="RESPONSEID"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="RESPONSEID"/>
     </attribute>
     <attribute id="STARTDATE" order="3" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="STARTDATE"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="STARTDATE"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="STARTDATE"/>
     </attribute>
     <attribute id="ENDDATE" order="4" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="ENDDATE"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="ENDDATE"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="ENDDATE"/>
     </attribute>
     <attribute id="RECIPIENTLASTNAME" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RECIPIENTLASTNAME"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="RECIPIENTLASTNAME"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="RECIPIENTLASTNAME"/>
     </attribute>
     <attribute id="RECIPIENTFIRSTNAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RECIPIENTFIRSTNAME"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="RECIPIENTFIRSTNAME"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="RECIPIENTFIRSTNAME"/>
     </attribute>
     <attribute id="RECIPIENTEMAIL" order="7" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="RECIPIENTEMAIL"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="RECIPIENTEMAIL"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="RECIPIENTEMAIL"/>
     </attribute>
     <attribute id="FINISHED" order="8" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="FINISHED"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="FINISHED"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="FINISHED"/>
     </attribute>
     <attribute id="STATUS" order="9" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="STATUS"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="STATUS"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="STATUS"/>
     </attribute>
     <attribute id="DATE" order="10" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="DATE"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="DATE"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="DATE"/>
     </attribute>
     <attribute id="Q1" order="11" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q1"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q1"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q1"/>
     </attribute>
     <attribute id="Q18" order="12" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q18"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q18"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q18"/>
     </attribute>
     <attribute id="Q2_COVID_IMPACT" order="13" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q2_COVID_IMPACT"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q2"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q2"/>
     </attribute>
     <attribute id="Q3_PTAX_REGISTERED" order="14" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q3_PTAX_REGISTERED"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q3"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q3"/>
     </attribute>
     <attribute id="Q5_LODGE_RETURN" order="15" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q5_LODGE_RETURN"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q5"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q5"/>
     </attribute>
     <attribute id="Q6_DEFER_RETURN" order="16" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q6_DEFER_RETURN"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q6"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q6"/>
     </attribute>
     <attribute id="Q4_DEFER_PAYMENT" order="17" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q4_DEFER_PAYMENT"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q4"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q4"/>
     </attribute>
     <attribute id="Q14" order="18" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q14"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q14"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q14"/>
     </attribute>
     <attribute id="Q8_BUSINESS_NAME" order="19" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q8_BUSINESS_NAME"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q8"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q8"/>
     </attribute>
     <attribute id="Q10_ABN" order="20" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q10_ABN"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q10"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q10"/>
     </attribute>
     <attribute id="Q9_BPARTNER" order="21" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q9_BPARTNER"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q9"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q9"/>
     </attribute>
     <attribute id="Q11_EMAIL" order="22" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q11_EMAIL"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q11"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q11"/>
     </attribute>
     <attribute id="Q12_PHONE_NUM" order="23" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q12_PHONE_NUM"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q12"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q12"/>
     </attribute>
     <attribute id="Q13_CONTACT_NAME" order="24" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="Q13_CONTACT_NAME"/>
-      <keyMapping columnObjectName="EDW_DH_STAGE.QResp_PTaxDeferral" columnName="Q13"/>
+      <keyMapping columnObjectName="Survey.PTAX_DEFERRAL" columnName="Q13"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
