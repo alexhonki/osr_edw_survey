@@ -38,6 +38,7 @@ context Survey {
             LOCATIONLONGITUDE      : String(100);
             LOCATIONACCURACY       : String(100);
             LOADSEQUENCE           : Integer;
+            ZCHANGETIME            : UTCTimestamp;
     };
 
     /*@@layout{"layoutInfo":{"x":-431,"y":-138.5}}*/
@@ -71,5 +72,6 @@ context Survey {
             LOCATIONLONGITUDE     : String(100);
             LOCATIONACCURACY      : String(100);
             LOADSEQUENCE          : Integer;
+            ZCHANGETIME           : UTCTimestamp;
     };
 };
