@@ -1,0 +1,52 @@
+FUNCTION "osr.edw.survey.Functions.Deferral::TF_PTax_Deferral_NoMatch"( )
+       RETURNS TABLE (
+    	RESPONSEID      		NVARCHAR(100),
+    	QUAL_ABN    			NVARCHAR(1024),
+    	QUAL_BPARTNER   		NVARCHAR(10),
+    	QUAL_BUSINESS_NAME		NVARCHAR(1024),
+    	BP_PARTNER      		NVARCHAR(10),
+    	BP_ABN      			NVARCHAR(60),
+    	NAME_ORG1				NVARCHAR(40), 
+		NAME_ORG2				NVARCHAR(40), 
+		NAME_ORG3				NVARCHAR(40), 
+		NAME_ORG4				NVARCHAR(40)
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+RETURN    
+    SELECT 
+    	a.RESPONSEID      		,
+    	a.QUAL_ABN    			,
+    	a.QUAL_BPARTNER   		,
+    	d.Q8_BUSINESS_NAME as QUAL_BUSINESS_NAME		,
+    	b.BP_PARTNER      		,
+    	b.BP_ABN      			,
+    	NAME_ORG1				, 
+		NAME_ORG2				, 
+		NAME_ORG3				, 
+		NAME_ORG4
+		FROM "osr.edw.survey.Functions.Match::TF_PTAX_DEFERRAL"('2019-07-01') as a
+			LEFT OUTER JOIN (
+							select  
+								a.PARTNER as BP_PARTNER, 
+								IDNUMBER as BP_ABN, 
+								NAME_ORG1, 
+								NAME_ORG2, 
+								NAME_ORG3, 
+								NAME_ORG4 from "osr.edw.survey.propagation.synonyms::RMS_BUT000_ORG" as a
+							LEFT OUTER JOIN "osr.edw.survey.propagation.synonyms::RMS_BUT0ID"  as b
+							ON a.partner = b.partner
+							where b.type = 'ZABN'
+						) as b
+			ON a.QUAL_BPARTNER = b.BP_PARTNER OR a.QUAL_ABN = b.BP_ABN
+			INNER JOIN "osr.edw.survey.Views.Source::CV_PTAX_DEFERRAL" as d
+			on a.responseid = d.responseid
+		where match_status IN ('N')	and length(QUAL_ABN) > 0 --and b.partner is not null
+order by responseid
+
+		;
+END;

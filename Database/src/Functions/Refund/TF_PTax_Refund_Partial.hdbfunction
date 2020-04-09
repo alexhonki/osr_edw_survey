@@ -1,0 +1,89 @@
+FUNCTION "osr.edw.survey.Functions.Refund::TF_PTax_Refund_Partial"( )
+       RETURNS TABLE (
+    	RESPONSEID      		NVARCHAR(100),
+    	QUAL_ABN    			NVARCHAR(1024),
+    	QUAL_BPARTNER   		NVARCHAR(10),
+    	BP_PARTNER      		NVARCHAR(10),
+    	BP_ABN      			NVARCHAR(60),
+    	BP_ABN_CHECK    		NVARCHAR(1),
+    	BP_BP_CHECK     		NVARCHAR(1),
+    	ABN_ABN         		NVARCHAR(60),
+    	ABN_PARTNER				NVARCHAR(10),
+    	ABN_ABN_CHECK   		NVARCHAR(1),
+    	ABN_BP_CHECK    		NVARCHAR(1),
+    	PTAX_THRESHOLD_CHECK	NVARCHAR(1),
+    	MATCH_STATUS			NVARCHAR(1),
+    	PARTNER_1				NVARCHAR(10),
+    	ABN_1					NVARCHAR(60),
+    	ACN_1					NVARCHAR(60),
+    	FULLNAME_1				NVARCHAR(150),
+    	GROUPNAME_1				NVARCHAR(100),
+    	TAX_BRACKET_1			NVARCHAR(25),
+    	PARTNER_2				NVARCHAR(10),
+    	ABN_2					NVARCHAR(60),
+    	ACN_2					NVARCHAR(60),
+    	FULLNAME_2				NVARCHAR(150),
+    	GROUPNAME_2				NVARCHAR(100),
+    	TAX_BRACKET_2			NVARCHAR(25)	
+    	
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+RETURN    
+    SELECT 
+    	a.RESPONSEID      		,
+    	a.QUAL_ABN    			,
+    	a.QUAL_BPARTNER   		,
+    	a.BP_PARTNER      		,
+    	a.BP_ABN      			,
+    	a.BP_ABN_CHECK    		,
+    	a.BP_BP_CHECK     		,
+    	a.ABN_ABN         		,
+    	a.ABN_PARTNER			,
+    	a.ABN_ABN_CHECK   		,
+    	a.ABN_BP_CHECK    		,
+    	a.PTAX_THRESHOLD_CHECK	,
+    	a.MATCH_STATUS			,
+    	b.PARTNER_1			,
+    	b.ABN_1				,
+    	b.ACN_1				,
+    	b.FULLNAME_1			,
+    	b.GROUPNAME_1			,
+    	b.TAX_BRACKET_1		,
+    	c.PARTNER_2			,
+    	c.ABN_2				,
+    	c.ACN_2				,
+    	c.FULLNAME_2			,
+    	c.GROUPNAME_2			,
+    	c.TAX_BRACKET_2			
+		FROM "osr.edw.survey.Functions.Match::TF_PTAX_PAYMTBUSINESS"('2019-07-01') as a
+			LEFT OUTER JOIN (
+						select 
+						partner			as PARTNER_1, 
+						CC_ABN			as ABN_1, 
+						CC_ZACN 		as ACN_1, 
+						"CC_FullName"	as FULLNAME_1, 
+						"CC_GroupName"	as GROUPNAME_1, 
+						CC_EST_TAX_BRACKET_JOINED as TAX_BRACKET_1
+						from "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+						) as b
+			ON a.BP_PARTNER = b.PARTNER_1 
+				LEFT OUTER JOIN (
+						select 
+						partner			as PARTNER_2, 
+						CC_ABN			as ABN_2, 
+						CC_ZACN 		as ACN_2, 
+						"CC_FullName"	as FULLNAME_2, 
+						"CC_GroupName"	as GROUPNAME_2, 
+						CC_EST_TAX_BRACKET_JOINED as TAX_BRACKET_2
+						from "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+						) as c
+				ON a.ABN_PARTNER = c.PARTNER_2
+		where match_status IN ('P')	
+		order by responseid
+		;
+END;
