@@ -26,12 +26,14 @@
       <viewAttribute id="MATCH_STATUS"/>
       <viewAttribute id="PTAX_THRESHOLD_CHECK"/>
       <viewAttribute id="SURVEYID"/>
+      <viewAttribute id="ZCHANGETIME"/>
       <viewAttribute hidden="true" id="JOIN$RESPONSEID$RESPONSEID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="osr.edw.survey.Views.Source::CV_PTAX_PAYMTBUSINESS">
       <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_EMAIL" source="Q7_EMAIL"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="SURVEYID" source="SURVEYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ZCHANGETIME" source="ZCHANGETIME"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
     </input>
     <input node="TableFunction_1">
@@ -75,6 +77,11 @@
     <attribute id="PTAX_THRESHOLD_CHECK" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="PTAX_THRESHOLD_CHECK"/>
       <keyMapping columnObjectName="Join_1" columnName="PTAX_THRESHOLD_CHECK"/>
+    </attribute>
+  
+    <attribute id="ZCHANGETIME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZCHANGETIME"/>
+      <keyMapping columnObjectName="Join_1" columnName="ZCHANGETIME"/>
     </attribute>
   </attributes>
   <calculatedAttributes/>
