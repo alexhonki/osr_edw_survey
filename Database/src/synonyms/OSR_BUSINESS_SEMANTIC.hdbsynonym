@@ -1,3 +1,4 @@
 {
-	"osr.edw.survey.business.semantic.synonym::T_PrtClientOverview": {}
+	"osr.edw.survey.business.semantic.synonym::T_PrtClientOverview": {},
+	"osr.edw.survey.business.semantic.synonym::CV_PaymentPlans" : {}
 }

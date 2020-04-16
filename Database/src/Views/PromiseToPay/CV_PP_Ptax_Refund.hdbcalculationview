@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="osr.edw.survey.Views.PromiseToPay::CV_PP_Ptax_Refund" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_PP_Ptax_Refund"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="osr.edw.survey.Views.Refund::CV_PTax_Refund">
+    <resourceUri>osr.edw.survey.Views.Refund::CV_PTax_Refund</resourceUri>
+  </DataSource>
+  <DataSource id="osr.edw.survey.business.semantic.synonym::CV_PaymentPlans">
+    <resourceUri>osr.edw.survey.business.semantic.synonym::CV_PaymentPlans</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="SURVEYID"/>
+      <viewAttribute id="RESPONSEID"/>
+      <viewAttribute id="QUAL_BPARTNER"/>
+      <viewAttribute id="QUAL_ABN"/>
+      <viewAttribute id="QUAL_EMAIL"/>
+      <viewAttribute id="PTAX_THRESHOLD_CHECK"/>
+      <viewAttribute id="ZCHANGETIME"/>
+      <viewAttribute id="PPKEY"/>
+      <viewAttribute id="GPART"/>
+      <viewAttribute id="PPCAT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="osr.edw.survey.Views.Refund::CV_PTax_Refund">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SURVEYID" source="SURVEYID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="RESPONSEID" source="RESPONSEID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_BPARTNER" source="QUAL_BPARTNER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_ABN" source="QUAL_ABN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_EMAIL" source="QUAL_EMAIL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ZCHANGETIME" source="ZCHANGETIME"/>
+    </input>
+    <input node="osr.edw.survey.business.semantic.synonym::CV_PaymentPlans">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PPKEY" source="PPKEY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GPART" source="GPART"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PPCAT" source="PPCAT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUAL_BPARTNER" source="GPART"/>
+    </input>
+    <joinAttribute name="QUAL_BPARTNER"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="SURVEYID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SURVEYID"/>
+      <keyMapping columnObjectName="Join_1" columnName="SURVEYID"/>
+    </attribute>
+    <attribute id="RESPONSEID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="RESPONSEID"/>
+      <keyMapping columnObjectName="Join_1" columnName="RESPONSEID"/>
+    </attribute>
+    <attribute id="QUAL_BPARTNER" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_BPARTNER"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUAL_BPARTNER"/>
+    </attribute>
+    <attribute id="QUAL_ABN" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_ABN"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUAL_ABN"/>
+    </attribute>
+    <attribute id="QUAL_EMAIL" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_EMAIL"/>
+      <keyMapping columnObjectName="Join_1" columnName="QUAL_EMAIL"/>
+    </attribute>
+    <attribute id="PTAX_THRESHOLD_CHECK" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PTAX_THRESHOLD_CHECK"/>
+      <keyMapping columnObjectName="Join_1" columnName="PTAX_THRESHOLD_CHECK"/>
+    </attribute>
+    <attribute id="ZCHANGETIME" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ZCHANGETIME"/>
+      <keyMapping columnObjectName="Join_1" columnName="ZCHANGETIME"/>
+    </attribute>
+    <attribute id="PPKEY" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PPKEY"/>
+      <keyMapping columnObjectName="Join_1" columnName="PPKEY"/>
+    </attribute>
+    <attribute id="GPART" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="GPART"/>
+      <keyMapping columnObjectName="Join_1" columnName="GPART"/>
+    </attribute>
+    <attribute id="PPCAT" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PPCAT"/>
+      <keyMapping columnObjectName="Join_1" columnName="PPCAT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="95" y="222"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="osr.edw.survey.Views.Refund::CV_PTax_Refund" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="56" y="26"/>
+      <rectangleSize width="338.30078125"/>
+    </shape>
+    <shape modelObjectName="osr.edw.survey.business.semantic.synonym::CV_PaymentPlans" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="478" y="19"/>
+      <rectangleSize width="429.478515625"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
