@@ -8,7 +8,7 @@
   "osr.edw.survey.business.semantic.synonym::CV_PaymentPlans": {
     "target": {
       "object": "osr.business.semantic.db.Business_Models.CommonObjects::CV_PaymentPlans",
-      "schema.configure": "logical-OSR-BUSINESS-SEMANTIC-grantor/schema"
+      "schema.configure": "logical-OSR-BUSINESS-SEMANTIC-grantor/schema" 
     }
   }  
 }
