@@ -7,8 +7,8 @@
   <DataSource id="osr.edw.survey.Views.Refund::CV_PTax_Refund">
     <resourceUri>osr.edw.survey.Views.Refund::CV_PTax_Refund</resourceUri>
   </DataSource>
-  <DataSource id="osr.edw.survey.business.semantic.synonym::CV_PaymentPlans">
-    <resourceUri>osr.edw.survey.business.semantic.synonym::CV_PaymentPlans</resourceUri>
+  <DataSource id="osr.edw.survey.Views.Source::CV_PromiseToPay">
+    <resourceUri>osr.edw.survey.Views.Source::CV_PromiseToPay</resourceUri>
   </DataSource>
 </dataSources>
 <calculationViews>
@@ -35,7 +35,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ZCHANGETIME" source="ZCHANGETIME"/>
     </input>
-    <input node="osr.edw.survey.business.semantic.synonym::CV_PaymentPlans">
+    <input node="osr.edw.survey.Views.Source::CV_PromiseToPay">
       <mapping xsi:type="Calculation:AttributeMapping" target="PPKEY" source="PPKEY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="GPART" source="GPART"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="PPCAT" source="PPCAT"/>
@@ -104,11 +104,11 @@
     </shape>
     <shape modelObjectName="osr.edw.survey.Views.Refund::CV_PTax_Refund" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="56" y="26"/>
-      <rectangleSize width="338.30078125"/>
+      <rectangleSize width="338"/>
     </shape>
-    <shape modelObjectName="osr.edw.survey.business.semantic.synonym::CV_PaymentPlans" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+    <shape modelObjectName="osr.edw.survey.Views.Source::CV_PromiseToPay" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="478" y="19"/>
-      <rectangleSize width="429.478515625"/>
+      <rectangleSize width="429"/>
     </shape>
   </shapes>
 </layout>
