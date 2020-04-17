@@ -1,0 +1,39 @@
+FUNCTION "osr.edw.survey.Functions.PromiseToPay::TF_PromiseToPay"( )
+     RETURNS TABLE (
+     	SURVEYID				NVARCHAR(100),
+     	RESPONSEID				NVARCHAR(100),
+     	QUAL_BPARTNER			NVARCHAR(10),
+     	QUAL_ABN				NVARCHAR(1024),
+     	QUAL_EMAIL				NVARCHAR(1024),
+     	PTAX_THRESHOLD_CHECK	NVARCHAR(1),
+     	ZCHANGETIME				Timestamp,
+     	PPKEY      				NVARCHAR(10),
+    	GPART      				NVARCHAR(10),
+    	PPCAT					NVARCHAR(2)
+    	
+    	
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+    RETURN 
+    SELECT
+    SURVEYID,
+    RESPONSEID,
+    QUAL_BPARTNER,
+    QUAL_ABN,
+    QUAL_EMAIL,
+    PTAX_THRESHOLD_CHECK,
+    ZCHANGETIME,
+    PPKEY,
+    GPART,
+    PPCAT
+    FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
+    INNER JOIN "osr.edw.survey.business.semantic.synonym::CV_PaymentPlans" as b
+    ON a.QUAL_BPARTNER = b.GPART
+ 
+    ;
+END;
