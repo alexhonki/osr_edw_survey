@@ -21,6 +21,7 @@ BEGIN
     ****************************/
     RETURN 
     SELECT
+    DISTINCT
     SURVEYID,
     RESPONSEID,
     QUAL_BPARTNER,
@@ -34,6 +35,7 @@ BEGIN
     FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
     INNER JOIN "osr.edw.survey.business.semantic.synonym::CV_PaymentPlans" as b
     ON a.QUAL_BPARTNER = b.GPART
+    WHERE PPSTA = ''
  
     ;
 END;
