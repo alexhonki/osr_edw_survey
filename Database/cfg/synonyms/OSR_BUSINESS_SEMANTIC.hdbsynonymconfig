@@ -10,5 +10,11 @@
       "object": "osr.business.semantic.db.Business_Models.CommonObjects::CV_PaymentPlans",
       "schema.configure": "logical-OSR-BUSINESS-SEMANTIC-grantor/schema" 
     }
-  }  
+  },
+  "osr.edw.survey.business.semantic.synonym::CVCS_CO_BpFacts": {
+    "target": {
+      "object": "osr.business.semantic.db.Business_Models.CommonObjects::CVCS_CO_BpFacts",
+      "schema.configure": "logical-OSR-BUSINESS-SEMANTIC-grantor/schema" 
+    }
+  }    
 }

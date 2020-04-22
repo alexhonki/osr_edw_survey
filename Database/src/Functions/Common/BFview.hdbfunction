@@ -1,0 +1,169 @@
+FUNCTION "osr.edw.survey.Functions.Common::BFview"( )
+     RETURNS TABLE (
+    	REFUND_SURVEY					NVARCHAR(1),
+    	DEFERRAL_SURVEY					NVARCHAR(1),
+    	QUAL_BPARTNER   				NVARCHAR(10),
+    	QUAL_ABN    					NVARCHAR(1024),
+    	PTAX_OVER_THRESHOLD				NVARCHAR(1),
+    	PTAX_ACN						NVARCHAR(60),
+    	PTAX_FULLNAME					NVARCHAR(150),
+    	DFACTS_PARTNERACC				NVARCHAR(12),
+		DFACTS_PSOBKEY					NVARCHAR(20),				
+		DFACTS_OBJNR					NVARCHAR(22),
+		DFACTS_THRESHOLD				NVARCHAR(1),
+		P2P_PPKEY						NVARCHAR(10),
+		P2P_FLAG						NVARCHAR(1)
+    	
+    	
+       )
+       LANGUAGE SQLSCRIPT 
+       SQL SECURITY INVOKER AS 
+BEGIN 
+    /*****************************
+        Write your function logic
+    ****************************/
+
+-- where the same BP is in both surveys
+BP_BOTH_SURVEY =
+			    SELECT 
+			    	'X'	as REFUND_SURVEY	,
+			    	'X'	as DEFERRAL_SURVEY	,
+			    	a.QUAL_ABN    			,
+			    	a.QUAL_BPARTNER 		,
+			    	COALESCE(MAX(a.PTAX_THRESHOLD_CHECK),MAX(b.PTAX_THRESHOLD_CHECK)) as PTAX_OVER_THRESHOLD
+					FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
+						inner join "osr.edw.survey.Views.Deferral::CV_PTax_Deferral" as b
+					on a.QUAL_BPARTNER = b.QUAL_BPARTNER 	
+					group by 
+					a.QUAL_ABN    			,
+			    	a.QUAL_BPARTNER
+			    	;
+
+-- where the BP only exists in one survey is in both surveys
+BP_ONE_SURVEY =		
+				Select Distinct 
+					REFUND_SURVEY		,
+					DEFERRAL_SURVEY		,
+					QUAL_ABN    		,
+			    	QUAL_BPARTNER 		,
+			    	PTAX_OVER_THRESHOLD
+			    	FROM (
+					    	SELECT distinct
+						    	'X'	as REFUND_SURVEY	,
+								''	as DEFERRAL_SURVEY	,
+								QUAL_ABN    			,
+						    	QUAL_BPARTNER 			,
+						    	MAX(PTAX_THRESHOLD_CHECK) as PTAX_OVER_THRESHOLD
+								FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund"
+								GROUP BY 
+								QUAL_ABN    			,
+								QUAL_BPARTNER
+						UNION	
+						    SELECT distinct
+						    	''	as REFUND_SURVEY	,
+								'X'	as DEFERRAL_SURVEY	,
+								QUAL_ABN    			,
+						    	QUAL_BPARTNER 			,
+						    	MAX(PTAX_THRESHOLD_CHECK) as PTAX_OVER_THRESHOLD
+								FROM "osr.edw.survey.Views.Deferral::CV_PTax_Deferral"
+								GROUP BY 
+								QUAL_ABN    			,
+								QUAL_BPARTNER
+								)
+					where QUAL_BPARTNER NOT IN(
+											    SELECT DISTINCT
+										    	a.QUAL_BPARTNER 
+												FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
+												inner join "osr.edw.survey.Views.Deferral::CV_PTax_Deferral" as b
+												on a.QUAL_BPARTNER = b.QUAL_BPARTNER 
+											)			
+			;  
+			
+PTAX_OVER_THRESHOLD = 			
+    				select * from :BP_BOTH_SURVEY
+    				UNION
+    				select * from :BP_ONE_SURVEY;
+    				
+MC_FEED =     				
+			    SELECT 
+			    	DISTINCT
+			    	a.REFUND_SURVEY			,
+			    	a.DEFERRAL_SURVEY		,
+			    	a.QUAL_BPARTNER   		,
+			    	a.QUAL_ABN    			,
+			    	a.PTAX_OVER_THRESHOLD	,
+			    	b.ACN_1					as PTAX_ACN,
+			    	b.FULLNAME_1			as PTAX_FULLNAME,
+			    	c.PARTNERACC			as DFACTS_PARTNERACC,
+					c.PSOBKEY				as DFACTS_PSOBKEY,
+					c.OBJNR					as DFACTS_OBJNR,
+					c.DFACTS_THRESHOLD		,
+					d.PPKEY					as P2P_PPKEY,
+					d.P2P					as P2P_FLAG
+					FROM :PTAX_OVER_THRESHOLD as a
+				--	FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
+				--	FROM "osr.edw.survey.Views.Refund::CV_PTax_Deferral" as a
+						LEFT OUTER JOIN (
+									select 
+									partner			as PARTNER_1, 
+									CC_ABN			as ABN_1, 
+									CC_ZACN 		as ACN_1, 
+									"CC_FullName"	as FULLNAME_1, 
+									"CC_GroupName"	as GROUPNAME_1, 
+									CC_EST_TAX_BRACKET_JOINED as TAX_BRACKET_1,
+									UNDER_OVER_DECL
+									from "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
+									) as b
+						ON a.QUAL_BPARTNER = b.PARTNER_1 
+							LEFT OUTER JOIN(
+											SELECT DISTINCT
+											a.PARTNERACC,
+											a.PSOBKEY,
+											a.OBJNR,
+											a.PARTNER as FACTS_PARTNER,
+											b.VALUE_GENERIC as DFACTS_THRESHOLD
+											FROM "osr.edw.survey.business.semantic.synonym::CVCS_CO_BpFacts" as a
+											LEFT OUTER JOIN (
+																SELECT DISTINCT
+																PARTNERACC,
+																PSOBKEY,
+																OBJNR,
+																PARTNER,
+																VALUE_GENERIC
+																FROM "osr.edw.survey.business.semantic.synonym::CVCS_CO_BpFacts"
+																where "FACT_TYPE" = 'ZPR2' and
+																"FACT_CATEGORY" = 'Z067'
+										--						and PARTNER IN ('0003679865', '0004396132')
+											) as b
+											ON 
+											a.PARTNERACC	= b.PARTNERACC	and
+											a.PSOBKEY		= b.PSOBKEY		and 
+											a.OBJNR			= b.OBJNR		and
+											a.PARTNER		= b.PARTNER
+										--	where a.PARTNER IN ('0003679865', '0004396132') 
+											) as c
+							ON a.QUAL_BPARTNER = c.FACTS_PARTNER
+								LEFT OUTER JOIN (select 'X' as P2P, GPART, PPKEY from "osr.edw.survey.Functions.PromiseToPay::TF_P2P_Ptax_Refund"( )) as d
+								ON a.QUAL_BPARTNER = d.GPART
+					--	WHERE --MATCH_STATUS IN ('C','A') --and FACTS_PARTNER IS NOT NULL
+					--	QUAL_BPARTNER  IN ('0003679865', '0004396132')
+						;    
+    
+    RETURN
+    select 
+    	REFUND_SURVEY					,
+    	DEFERRAL_SURVEY					,
+    	QUAL_BPARTNER   				,
+    	QUAL_ABN    					,
+    	PTAX_OVER_THRESHOLD				,
+    	PTAX_ACN						,
+    	PTAX_FULLNAME					,
+    	DFACTS_PARTNERACC				,
+		DFACTS_PSOBKEY					,				
+		DFACTS_OBJNR					,
+		DFACTS_THRESHOLD				,
+		P2P_PPKEY						,
+		P2P_FLAG						
+    from :MC_FEED;
+    
+END;

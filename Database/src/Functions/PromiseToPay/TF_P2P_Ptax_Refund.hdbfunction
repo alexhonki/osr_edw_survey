@@ -1,4 +1,4 @@
-FUNCTION "osr.edw.survey.Functions.PromiseToPay::TF_PromiseToPay"( )
+FUNCTION "osr.edw.survey.Functions.PromiseToPay::TF_P2P_Ptax_Refund"( )
      RETURNS TABLE (
      	SURVEYID				NVARCHAR(100),
      	RESPONSEID				NVARCHAR(100),
