@@ -140,6 +140,7 @@ MC_FEED =
 											a.PSOBKEY		= b.PSOBKEY		and 
 											a.OBJNR			= b.OBJNR		and
 											a.PARTNER		= b.PARTNER
+											WHERE FACT_SET = 'ZPTX' 
 										--	where a.PARTNER IN ('0003679865', '0004396132') 
 											) as c
 							ON a.QUAL_BPARTNER = c.FACTS_PARTNER
