@@ -3,6 +3,7 @@ FUNCTION "osr.edw.survey.Functions.Deferral::TF_PTax_Deferral_Partial"( )
     	RESPONSEID      		NVARCHAR(100),
     	QUAL_ABN    			NVARCHAR(1024),
     	QUAL_BPARTNER   		NVARCHAR(10),
+    	QUAL_BUSINESS_NAME		NVARCHAR(1024),
     	BP_PARTNER      		NVARCHAR(10),
     	BP_ABN      			NVARCHAR(60),
     	BP_ABN_CHECK    		NVARCHAR(1),
@@ -38,6 +39,7 @@ RETURN
     	a.RESPONSEID      		,
     	a.QUAL_ABN    			,
     	a.QUAL_BPARTNER   		,
+    	d.Q8_BUSINESS_NAME as QUAL_BUSINESS_NAME		,
     	a.BP_PARTNER      		,
     	a.BP_ABN      			,
     	a.BP_ABN_CHECK    		,
@@ -83,6 +85,8 @@ RETURN
 						from "osr.edw.survey.business.semantic.synonym::T_PrtClientOverview"
 						) as c
 				ON a.ABN_PARTNER = c.PARTNER_2
+					INNER JOIN "osr.edw.survey.Views.Source::CV_PTAX_DEFERRAL" as d
+					on a.responseid = d.responseid
 		where match_status IN ('P')	
 		order by responseid
 		;
