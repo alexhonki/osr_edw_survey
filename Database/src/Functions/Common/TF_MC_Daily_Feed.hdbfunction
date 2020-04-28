@@ -1,4 +1,4 @@
-FUNCTION "osr.edw.survey.Functions.Common::BFview"( )
+FUNCTION "osr.edw.survey.Functions.Common::TF_MC_Daily_Feed"( )
      RETURNS TABLE (
     	REFUND_SURVEY					NVARCHAR(1),
     	DEFERRAL_SURVEY					NVARCHAR(1),
