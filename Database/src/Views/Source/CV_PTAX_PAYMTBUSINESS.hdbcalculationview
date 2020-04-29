@@ -15,11 +15,13 @@
   <calculationView xsi:type="Calculation:RankView" id="Rank_1">
     <viewAttributes>
       <viewAttribute id="ZCHANGETIME"/>
+    
+      <viewAttribute id="SURVEYID"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="osr.edw.survey.Data::Survey.PTAX_PAYMTBUSINESS"/>
     <windowFunction dynamicPartitionAttributes="false">
-      <partitionViewAttributeName>ZCHANGETIME</partitionViewAttributeName>
+      <partitionViewAttributeName>SURVEYID</partitionViewAttributeName>
       <order byViewAttributeName="ZCHANGETIME" direction="DESC"/>
       <rankThreshold>
         <value>1</value>
@@ -206,11 +208,11 @@
     </shape>
     <shape modelObjectName="osr.edw.survey.Data::Survey.PTAX_PAYMTBUSINESS" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="20" y="30"/>
-      <rectangleSize width="368.32421875"/>
+      <rectangleSize width="368"/>
     </shape>
     <shape modelObjectName="Rank_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
       <upperLeftCorner x="451" y="36"/>
-      <rectangleSize width="166.05615234375"/>
+      <rectangleSize width="166"/>
     </shape>
   </shapes>
 </layout>
