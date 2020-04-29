@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="osr.edw.survey.Views.Reporting::CV_MC_Daily_Feed" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_MC_Daily_Feed"/>
+<localVariables/>
+<variableMappings/>
+<dataSources/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:TableFunctionView" id="TableFunction_1" tableFunctionName="osr.edw.survey.Functions.Common::TF_MC_Daily_Feed">
+    <viewAttributes/>
+    <calculatedViewAttributes/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="TableFunction_1">
+  <attributes>
+    <attribute id="DFACTS_OBJNR" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DFACTS_OBJNR"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="DFACTS_OBJNR"/>
+    </attribute>
+    <attribute id="DFACTS_THRESHOLD" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DFACTS_THRESHOLD"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="DFACTS_THRESHOLD"/>
+    </attribute>
+    <attribute id="REFUND_SURVEY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="REFUND_SURVEY"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="REFUND_SURVEY"/>
+    </attribute>
+    <attribute id="DEFERRAL_SURVEY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DEFERRAL_SURVEY"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="DEFERRAL_SURVEY"/>
+    </attribute>
+    <attribute id="QUAL_BPARTNER" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_BPARTNER"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="QUAL_BPARTNER"/>
+    </attribute>
+    <attribute id="QUAL_ABN" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="QUAL_ABN"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="QUAL_ABN"/>
+    </attribute>
+    <attribute id="PTAX_OVER_THRESHOLD" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PTAX_OVER_THRESHOLD"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="PTAX_OVER_THRESHOLD"/>
+    </attribute>
+    <attribute id="P2P_PPKEY" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="P2P_PPKEY"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="P2P_PPKEY"/>
+    </attribute>
+    <attribute id="PTAX_ACN" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PTAX_ACN"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="PTAX_ACN"/>
+    </attribute>
+    <attribute id="P2P_FLAG" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="P2P_FLAG"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="P2P_FLAG"/>
+    </attribute>
+    <attribute id="PTAX_FULLNAME" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PTAX_FULLNAME"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="PTAX_FULLNAME"/>
+    </attribute>
+    <attribute id="DFACTS_PARTNERACC" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DFACTS_PARTNERACC"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="DFACTS_PARTNERACC"/>
+    </attribute>
+    <attribute id="DFACTS_PSOBKEY" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DFACTS_PSOBKEY"/>
+      <keyMapping columnObjectName="TableFunction_1" columnName="DFACTS_PSOBKEY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures>
+    <measure id="COUNT_1" order="1" aggregationType="sum" measureType="simple" calculatedMeasureType="counter" aggregatable="true" datatype="BIGINT" length="">
+      <exceptionAggregation>
+        <attribute attributeName="QUAL_BPARTNER"/>
+      </exceptionAggregation>
+      <formula>1</formula>
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="TableFunction_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-68" y="256"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
