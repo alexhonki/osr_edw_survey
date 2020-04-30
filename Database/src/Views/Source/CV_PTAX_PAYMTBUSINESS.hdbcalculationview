@@ -21,7 +21,7 @@
     <calculatedViewAttributes/>
     <input node="osr.edw.survey.Data::Survey.PTAX_PAYMTBUSINESS"/>
     <windowFunction dynamicPartitionAttributes="false">
-      <partitionViewAttributeName>ZCHANGETIME</partitionViewAttributeName>
+      <partitionViewAttributeName>SURVEYID</partitionViewAttributeName>
       <order byViewAttributeName="ZCHANGETIME" direction="DESC"/>
       <rankThreshold>
         <value>1</value>
