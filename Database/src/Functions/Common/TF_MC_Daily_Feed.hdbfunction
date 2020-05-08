@@ -4,6 +4,9 @@ FUNCTION "osr.edw.survey.Functions.Common::TF_MC_Daily_Feed"( )
     	DEFERRAL_SURVEY					NVARCHAR(1),
     	QUAL_BPARTNER   				NVARCHAR(10),
     	QUAL_ABN    					NVARCHAR(1024),
+    	QUAL_Q2_PTAX_THRESHOLD			NVARCHAR(1024),
+    	QUAL_Q12_CONVID_IMPACT			NVARCHAR(1024),
+    	QUAL_Q4_DEFER_PAYMENT			NVARCHAR(1024),
     	PTAX_OVER_THRESHOLD				NVARCHAR(1),
     	PTAX_ACN						NVARCHAR(60),
     	PTAX_FULLNAME					NVARCHAR(150),
@@ -30,51 +33,69 @@ BP_BOTH_SURVEY =
 			    	'X'	as DEFERRAL_SURVEY	,
 			    	a.QUAL_ABN    			,
 			    	a.QUAL_BPARTNER 		,
-			    	COALESCE(MAX(a.PTAX_THRESHOLD_CHECK),MAX(b.PTAX_THRESHOLD_CHECK)) as PTAX_OVER_THRESHOLD
-					FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
-						inner join "osr.edw.survey.Views.Deferral::CV_PTax_Deferral" as b
+			    	COALESCE(MAX(a.PTAX_THRESHOLD_CHECK),MAX(b.PTAX_THRESHOLD_CHECK)) as PTAX_OVER_THRESHOLD,
+			    	a.QUAL_Q2_PTAX_THRESHOLD,
+			    	a.QUAL_Q12_CONVID_IMPACT,
+			    	b.QUAL_Q4_DEFER_PAYMENT
+					FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund_DF" as a
+						inner join "osr.edw.survey.Views.Deferral::CV_PTax_Deferral_DF" as b
 					on a.QUAL_BPARTNER = b.QUAL_BPARTNER 	
 					group by 
 					a.QUAL_ABN    			,
-			    	a.QUAL_BPARTNER
+			    	a.QUAL_BPARTNER			,
+			    	a.QUAL_Q2_PTAX_THRESHOLD,
+			    	a.QUAL_Q12_CONVID_IMPACT,
+			    	b.QUAL_Q4_DEFER_PAYMENT
 			    	;
 
--- where the BP only exists in one survey is in both surveys
+-- where the BP only exists in one survey and is not in both surveys
 BP_ONE_SURVEY =		
 				Select Distinct 
-					REFUND_SURVEY		,
-					DEFERRAL_SURVEY		,
-					QUAL_ABN    		,
-			    	QUAL_BPARTNER 		,
-			    	PTAX_OVER_THRESHOLD
+					REFUND_SURVEY			,
+					DEFERRAL_SURVEY			,
+					QUAL_ABN    			,
+			    	QUAL_BPARTNER 			,
+			    	PTAX_OVER_THRESHOLD		,
+			    	QUAL_Q2_PTAX_THRESHOLD	,
+			    	QUAL_Q12_CONVID_IMPACT	,
+			    	QUAL_Q4_DEFER_PAYMENT
 			    	FROM (
 					    	SELECT distinct
 						    	'X'	as REFUND_SURVEY	,
 								''	as DEFERRAL_SURVEY	,
 								QUAL_ABN    			,
 						    	QUAL_BPARTNER 			,
-						    	MAX(PTAX_THRESHOLD_CHECK) as PTAX_OVER_THRESHOLD
-								FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund"
+						    	MAX(PTAX_THRESHOLD_CHECK) as PTAX_OVER_THRESHOLD,
+						    	QUAL_Q2_PTAX_THRESHOLD,
+						    	QUAL_Q12_CONVID_IMPACT,
+						    	NULL AS QUAL_Q4_DEFER_PAYMENT
+								FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund_DF"
 								GROUP BY 
 								QUAL_ABN    			,
-								QUAL_BPARTNER
+								QUAL_BPARTNER			,
+								QUAL_Q2_PTAX_THRESHOLD	,
+						    	QUAL_Q12_CONVID_IMPACT
 						UNION	
 						    SELECT distinct
 						    	''	as REFUND_SURVEY	,
 								'X'	as DEFERRAL_SURVEY	,
 								QUAL_ABN    			,
 						    	QUAL_BPARTNER 			,
-						    	MAX(PTAX_THRESHOLD_CHECK) as PTAX_OVER_THRESHOLD
-								FROM "osr.edw.survey.Views.Deferral::CV_PTax_Deferral"
+						    	MAX(PTAX_THRESHOLD_CHECK) as PTAX_OVER_THRESHOLD,
+						    	NULL AS QUAL_Q2_PTAX_THRESHOLD,
+						    	NULL AS QUAL_Q12_CONVID_IMPACT,
+						    	QUAL_Q4_DEFER_PAYMENT
+								FROM "osr.edw.survey.Views.Deferral::CV_PTax_Deferral_DF"
 								GROUP BY 
 								QUAL_ABN    			,
-								QUAL_BPARTNER
+								QUAL_BPARTNER			,
+								QUAL_Q4_DEFER_PAYMENT
 								)
 					where QUAL_BPARTNER NOT IN(
 											    SELECT DISTINCT
 										    	a.QUAL_BPARTNER 
-												FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund" as a
-												inner join "osr.edw.survey.Views.Deferral::CV_PTax_Deferral" as b
+												FROM "osr.edw.survey.Views.Refund::CV_PTax_Refund_DF" as a
+												inner join "osr.edw.survey.Views.Deferral::CV_PTax_Deferral_DF" as b
 												on a.QUAL_BPARTNER = b.QUAL_BPARTNER 
 											)			
 			;  
@@ -91,6 +112,9 @@ MC_FEED =
 			    	a.DEFERRAL_SURVEY		,
 			    	a.QUAL_BPARTNER   		,
 			    	a.QUAL_ABN    			,
+			    	a.QUAL_Q2_PTAX_THRESHOLD,
+			    	a.QUAL_Q12_CONVID_IMPACT,
+			    	a.QUAL_Q4_DEFER_PAYMENT	,
 			    	a.PTAX_OVER_THRESHOLD	,
 			    	b.ACN_1					as PTAX_ACN,
 			    	b.FULLNAME_1			as PTAX_FULLNAME,
@@ -146,6 +170,7 @@ MC_FEED =
 							ON a.QUAL_BPARTNER = c.FACTS_PARTNER
 								LEFT OUTER JOIN (select 'X' as P2P, GPART, PPKEY from "osr.edw.survey.Functions.PromiseToPay::TF_P2P_Ptax_Refund"( )) as d
 								ON a.QUAL_BPARTNER = d.GPART
+					--				LEFT OUTER JOIN 
 					--	WHERE --MATCH_STATUS IN ('C','A') --and FACTS_PARTNER IS NOT NULL
 					--	QUAL_BPARTNER  IN ('0003679865', '0004396132')
 						;    
@@ -156,6 +181,9 @@ MC_FEED =
     	DEFERRAL_SURVEY					,
     	QUAL_BPARTNER   				,
     	QUAL_ABN    					,
+    	QUAL_Q2_PTAX_THRESHOLD			,
+		QUAL_Q12_CONVID_IMPACT			,
+		QUAL_Q4_DEFER_PAYMENT			,
     	PTAX_OVER_THRESHOLD				,
     	PTAX_ACN						,
     	PTAX_FULLNAME					,

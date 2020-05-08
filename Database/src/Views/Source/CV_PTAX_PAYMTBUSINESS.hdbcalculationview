@@ -28,7 +28,7 @@
       </rankThreshold>
     </windowFunction>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="inner">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="inner" filterExpressionLanguage="SQL">
     <viewAttributes>
       <viewAttribute id="SURVEYID"/>
       <viewAttribute id="RESPONSEID"/>
@@ -85,6 +85,7 @@
     <input node="Rank_1">
       <mapping xsi:type="Calculation:AttributeMapping" target="ZCHANGETIME" source="ZCHANGETIME"/>
     </input>
+    <filter>&quot;FINISHED&quot; = '1'</filter>
     <joinAttribute name="ZCHANGETIME"/>
   </calculationView>
 </calculationViews>
