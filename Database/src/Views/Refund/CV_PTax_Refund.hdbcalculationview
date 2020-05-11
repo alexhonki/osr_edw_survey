@@ -48,7 +48,7 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="PTAX_THRESHOLD_CHECK" source="PTAX_THRESHOLD_CHECK"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$RESPONSEID$RESPONSEID" source="RESPONSEID"/>
     </input>
-    <filter>&quot;MATCH_STATUS&quot; IN ('C', 'A') AND ((&quot;Q2_PTAX_THRESHOLD&quot; = '2' and &quot;Q12_CONVID_IMPACT&quot; IN ('1','')) OR &quot;Q2_PTAX_THRESHOLD&quot; = '1')
+    <filter>&quot;MATCH_STATUS&quot; IN ('C', 'A') AND ((&quot;Q2_PTAX_THRESHOLD&quot; = '2' and &quot;Q12_CONVID_IMPACT&quot; IN ('1')) OR &quot;Q2_PTAX_THRESHOLD&quot; = '1')
 
 
 
